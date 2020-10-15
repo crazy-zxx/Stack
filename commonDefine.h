@@ -31,11 +31,15 @@ typedef struct sqSNode{
 
 
 /* ----------- 链栈结构定义 ---------------*/
-//单链表节点
-typedef struct lSNode {
+//链表节点
+typedef struct sNode {
     SElemType data;
-    struct lSNode *next;
-}LSNode, *Stack;
+    struct sNode *next;
+}SNode, *Stack;
+//链栈（栈顶指针）
+typedef struct lSNode {
+    Stack top;
+}LinkStack;
 /*-----------------------------------------*/
 
 

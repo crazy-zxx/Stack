@@ -131,54 +131,54 @@ void function() {
 /*-------------------------------------------------------------------------------------*/
 
 /*------------------------------------ 链栈的实现 ---------------------------------------*/
-Status InitStack(Stack &S) {
-    S=NULL;
+Status InitStack(LinkStack &S) {
+    S.top=NULL;
 
     return OK;
 }
 
 /*-------------- 取栈顶元素值 ----------------*/
-Status GetTop(Stack S, SElemType &e) {
+Status GetTop(LinkStack S, SElemType &e) {
     //判断栈空
-    if (!S) {
+    if (!S.top) {
         return ERROR;
     }
     //栈顶值
-    e = S->data;
+    e = S.top->data;
 
     return OK;
 }
 
 /*-------------- 入栈 ----------------*/
-Status Push(Stack &S, SElemType e) {
+Status Push(LinkStack &S, SElemType e) {
 
     //入栈,头插法
-    Stack t=(Stack)malloc(sizeof(LSNode));
+    Stack t=(Stack)malloc(sizeof(SNode));
     t->data=e;
-    t->next=S;
-    S=t;
+    t->next=S.top;
+    S.top=t;
 
     return OK;
 }
 
 /*-------------- 出栈 ----------------*/
-Status Pop(Stack &S, SElemType &e) {
+Status Pop(LinkStack &S, SElemType &e) {
     //判断栈空
-    if (!S) {
+    if (!S.top) {
         return ERROR;
     }
     //出栈
-    e=S->data;
-    Stack t=S;
-    S=S->next;
+    e=S.top->data;
+    Stack t=S.top;
+    S.top=S.top->next;
     free(t);
 
     return OK;
 }
 
 /*-------------- 栈空判断 ----------------*/
-Status StackEmpty(Stack S) {
-    if (!S) {
+Status StackEmpty(LinkStack S) {
+    if (!S.top) {
         return TRUE;
     } else {
         return FALSE;
@@ -186,10 +186,11 @@ Status StackEmpty(Stack S) {
 }
 
 /*-------------- 栈的长度 ----------------*/
-int StackLength(Stack S) {
+int StackLength(LinkStack S) {
     int count = 0;
-    while (S) {
-        S=S->next;
+    Stack t=S.top;
+    while (t) {
+        t=t->next;
         count++;
     }
     return count;
@@ -197,23 +198,24 @@ int StackLength(Stack S) {
 
 
 /*-------------- 销毁栈 ----------------*/
-Status DestroyStack(Stack &S) {
-    while (S){
-        Stack t=S;
-        S=S->next;
+Status DestroyStack(LinkStack &S) {
+    while (S.top){
+        Stack t=S.top;
+        S.top=S.top->next;
         free(t);
     }
 }
 
 /*-------------- 打印栈(从栈顶到栈底) ----------------*/
-void printStack(Stack S) {
-    if (!S) {
+void printStack(LinkStack S) {
+    if (!S.top) {
         printf("空栈！\n");
         return;
     }
-    while (S) {
-        printf("%d ", S->data);
-        S=S->next;
+    Stack t=S.top;
+    while (t) {
+        printf("%d ", t->data);
+        t=t->next;
     }
     printf("\n");
 }
@@ -241,7 +243,7 @@ int main() {
 //    printf("empty:%d\n", StackEmpty(S1));
 //    DestroyStack(S1);
 
-    Stack S2;
+    LinkStack S2;
     InitStack(S2);
     printStack(S2);
     SElemType se2 = 1000;
