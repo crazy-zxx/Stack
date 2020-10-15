@@ -63,6 +63,8 @@ Status StackEmpty(SqStack S) {
     } else {
         return FALSE;
     }
+
+    return OK;
 }
 
 /*-------------- 栈的长度 ----------------*/
@@ -72,12 +74,15 @@ int StackLength(SqStack S) {
         S.top--;
         count++;
     }
+
     return count;
 }
 
 /*-------------- 清空栈 ----------------*/
 Status ClearStack(SqStack &S) {
     S.top = S.base;
+
+    return OK;
 }
 
 /*-------------- 销毁栈 ----------------*/
@@ -85,6 +90,8 @@ Status DestroyStack(SqStack &S) {
     free(S.base);
     S.top = S.base = NULL;
     S.stacksize = 0;
+
+    return OK;
 }
 
 /*-------------- 打印栈(从栈顶到栈底) ----------------*/
@@ -183,6 +190,8 @@ Status StackEmpty(LinkStack S) {
     } else {
         return FALSE;
     }
+
+    return OK;
 }
 
 /*-------------- 栈的长度 ----------------*/
@@ -193,6 +202,7 @@ int StackLength(LinkStack S) {
         t=t->next;
         count++;
     }
+
     return count;
 }
 
@@ -204,6 +214,8 @@ Status DestroyStack(LinkStack &S) {
         S.top=S.top->next;
         free(t);
     }
+
+    return OK;
 }
 
 /*-------------- 打印栈(从栈顶到栈底) ----------------*/
