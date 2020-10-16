@@ -63,8 +63,6 @@ Status StackEmpty(SqStack S) {
     } else {
         return FALSE;
     }
-
-    return OK;
 }
 
 /*-------------- 栈的长度 ----------------*/
@@ -190,8 +188,6 @@ Status StackEmpty(LinkStack S) {
     } else {
         return FALSE;
     }
-
-    return OK;
 }
 
 /*-------------- 栈的长度 ----------------*/
